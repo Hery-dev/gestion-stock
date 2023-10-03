@@ -5,18 +5,10 @@
     "version": "1.0.0",
     "title": "Describing the root to communicate with customers accounting application",
     "contact": {
-      "email": "it-squad-money@ekwateur.fr"
+      "email": "herydevmaster22@gmail.com"
     }
   },
   "servers": [
-    {
-      "description": "DEV",
-      "url": "https://customers-accounting.ekwadev.fr"
-    },
-    {
-      "description": "QUAL",
-      "url": "https://customers-accounting.ekwaqua.fr"
-    },
     {
       "description": "PREPROD",
       "url": "TODO"
@@ -27,41 +19,41 @@
     }
   ],
   "paths": {
-    "/api/v1/customers/accounting/company": {
+    "/api/v1/gestion-stock/fournisseur": {
       "post": {
         "tags": [
-          "Company"
+          "Fournisseur"
         ],
-        "operationId": "createCompany",
-        "summary": "Create a company from a Json",
-        "description": "Create a company",
+        "operationId": "createFournisseur",
+        "summary": "Create a fournisseur from a Json",
+        "description": "Create a fournisseur",
         "requestBody": {
-          "description": "Company to create",
+          "description": "Fournisseur to create",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CompanyDetails"
+                "$ref": "#/components/schemas/FournisseurDetails"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Company was created successfully",
+            "description": "fournisseur was created successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompanyDetailsResources"
+                  "$ref": "#/components/schemas/FournisseurDetailsResources"
                 }
               }
             }
           },
           "400": {
-            "description": "Company empty",
+            "description": "fournisseur empty",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompanyDetails"
+                  "$ref": "#/components/schemas/FournisseurDetails"
                 }
               }
             }
@@ -70,18 +62,18 @@
       },
       "get": {
         "tags": [
-          "Company"
+          "Fournisseur"
         ],
         "operationId": "findAll",
-        "summary": "Find all company details data",
-        "description": "Find all company details data stored in the database",
+        "summary": "Find all fournisseur details data",
+        "description": "Find all fournisseur details data stored in the database",
         "responses": {
           "200": {
-            "description": "All company details data was returned",
+            "description": "All fournisseur details data was returned",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompanyResources"
+                  "$ref": "#/components/schemas/FournisseurResources"
                 }
               }
             }
@@ -89,43 +81,43 @@
         }
       }
     },
-    "/api/v1/customers/accounting/company/{company-erp-code}": {
+    "/api/v1/gestion-stock/fournisseur/{fournisseur-code}": {
       "get": {
         "tags": [
-          "Company"
+          "Fournisseur"
         ],
-        "operationId": "getCompanyByCompanyErpCode",
-        "summary": "Get company details details by Id",
-        "description": "Get company details by Id",
+        "operationId": "getFournisseurByFournisseurCode",
+        "summary": "Get fournisseur details details by Id",
+        "description": "Get fournisseur details by Id",
         "parameters": [
           {
-            "name": "company-erp-code",
+            "name": "fournisseur-code",
             "in": "path",
-            "description": "the code of company",
+            "description": "unique identification of fournisseur",
             "required": true,
             "schema": {
               "type": "string",
-              "example": "EKW_PRO"
+              "example": "FR_002"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Company details",
+            "description": "Fournisseur details",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompanyDetailsResources"
+                  "$ref": "#/components/schemas/FournisseurDetailsResources"
                 }
               }
             }
           },
           "404": {
-            "description": "Company not found",
+            "description": "Fournisseur not found",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompanyDetailsResources"
+                  "$ref": "#/components/schemas/FournisseurDetailsResources"
                 }
               }
             }
@@ -134,50 +126,50 @@
       },
       "put": {
         "tags": [
-          "Company"
+          "Fournisseur"
         ],
-        "operationId": "updateCompanyByCompanyErpCode",
-        "summary": "Updating company details entry",
-        "description": "update company",
+        "operationId": "updateFournisseurByFournisseurCode",
+        "summary": "Updating fournisseur details entry",
+        "description": "update fournisseur",
         "parameters": [
           {
-            "name": "company-erp-code",
+            "name": "fournisseur-code",
             "in": "path",
-            "description": "the code of company",
+            "description": "unique identification of fournisseur",
             "required": true,
             "schema": {
               "type": "string",
-              "example": "EKW_PRO"
+              "example": "FR_002"
             }
           }
         ],
         "requestBody": {
-          "description": "Company details to update",
+          "description": "Fournisseur details to update",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CompanyDetails"
+                "$ref": "#/components/schemas/FournisseurDetails"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Company details was updated successfully",
+            "description": "Fournisseur details was updated successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompanyDetailsResources"
+                  "$ref": "#/components/schemas/FournisseurDetailsResources"
                 }
               }
             }
           },
           "404": {
-            "description": "COMPANY_NOT_FOUND",
+            "description": "FOURNISSEUR_NOT_FOUND",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CompanyDetailsResources"
+                  "$ref": "#/components/schemas/FournisseurDetailsResources"
                 }
               }
             }
@@ -188,70 +180,70 @@
   },
   "components": {
     "schemas": {
-      "CompanyResources": {
+      "FournisseurResources": {
         "type": "object",
         "properties": {
           "message": {
             "type": "string",
-            "example": "Company not found"
+            "example": "Fournisseur not found"
           },
           "code": {
             "type": "string",
             "description": "Short code to identify the error",
-            "example": "COMPANY_EMPTY"
+            "example": "FOURNISSEUR_EMPTY"
           },
-          "companyDetails": {
+          "fournisseurDetails": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CompanyDetails"
+              "$ref": "#/components/schemas/FournisseurDetails"
             }
           }
         }
       },
-      "CompanyDetailsResources": {
+      "FournisseurDetailsResources": {
         "type": "object",
         "properties": {
           "message": {
             "type": "string",
-            "example": "Company not found"
+            "example": "Fournisseur not found"
           },
           "code": {
             "type": "string",
             "description": "Short code to identify the error",
-            "example": "COMPANY_EMPTY"
+            "example": "FOURNISSEUR_EMPTY"
           },
-          "companyDetails": {
-            "$ref": "#/components/schemas/CompanyDetails"
+          "fournisseurDetails": {
+            "$ref": "#/components/schemas/FournisseurDetails"
           }
         }
       },
-      "CompanyDetails": {
+      "FournisseurDetails": {
         "type": "object",
         "required": [
-          "companyErpCode",
-          "companyName",
-          "siren"
+          "fournisseurCode",
+          "fournisseurName",
+          "fournisseurContact"
         ],
         "properties": {
-          "companyErpCode": {
+          "fournisseurCode": {
             "type": "string",
-            "description": "company ERP code",
-            "example": "JOUL"
+            "description": "code of an fournisseur",
+            "example": "FR_002"
           },
-          "companyName": {
+          "fournisseurName": {
             "type": "string",
-            "description": "name of a company",
-            "example": "Ekwateur"
+            "description": "name of a fournisseur",
+            "example": "Jean"
           },
-          "siren":{
+          "fournisseurContact": {
             "type": "string",
-            "description": "siren of a company",
-            "example": "12365478"
+            "description": "contact of fournisseur",
+            "example": "+261 38 54 698 24"
           },
-          "address":{
+          "fournisseurAddress": {
             "type": "string",
-            "description": "addres of a company",
-            "example": "78 Rue Roussvelt Paris 786203 France"
+            "description": "address of fournisseur",
+            "example": "Tananarivo 101"
           }
         }
       }

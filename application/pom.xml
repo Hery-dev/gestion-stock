@@ -13,7 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>application</name>
-	<description>Externalisation client account</description>
+	<description>Gestion stock</description>
 	<modules>
 		<module>server</module>
 	</modules>
@@ -148,31 +148,17 @@
 					</configuration>
 					<executions>
 						<execution>
-							<id>generate-sources-server-payment-method</id>
+							<id>generate-sources-server-fournisseur</id>
 							<phase>none</phase>
 							<goals>
 								<goal>generate</goal>
 							</goals>
 							<configuration>
 								<generatorName>spring</generatorName>
-								<inputSpec>payment-method.json</inputSpec>
-								<apiPackage>com.accounting.customers.fr.api.paymentMethod</apiPackage>
-								<invokerPackage>com.accounting.customers.fr.rest.client.paymentMethod</invokerPackage>
-								<modelPackage>com.accounting.customers.fr.rest.model.paymentMethod</modelPackage>
-							</configuration>
-						</execution>
-						<execution>
-							<id>generate-sources-server-company</id>
-							<phase>none</phase>
-							<goals>
-								<goal>generate</goal>
-							</goals>
-							<configuration>
-								<generatorName>spring</generatorName>
-								<inputSpec>company.json</inputSpec>
-								<apiPackage>com.accounting.customers.fr.api.company</apiPackage>
-								<invokerPackage>com.accounting.customers.fr.rest.client.company</invokerPackage>
-								<modelPackage>com.accounting.customers.fr.rest.model.company</modelPackage>
+								<inputSpec>fournisseur.json</inputSpec>
+								<apiPackage>com.accounting.customers.fr.api.fournisseur</apiPackage>
+								<invokerPackage>com.accounting.customers.fr.rest.client.fournisseur</invokerPackage>
+								<modelPackage>com.accounting.customers.fr.rest.model.fournisseur</modelPackage>
 							</configuration>
 						</execution>
 					</executions>
