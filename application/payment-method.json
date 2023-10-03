@@ -1,0 +1,282 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "API to exchange with customers accounting application\n",
+    "version": "1.0.0",
+    "title": "Describing the root to communicate with customers accounting application",
+    "contact": {
+      "email": "it-squad-money@ekwateur.fr"
+    }
+  },
+  "servers": [
+    {
+      "description": "DEV",
+      "url": "https://customers-accounting.ekwadev.fr"
+    },
+    {
+      "description": "QUAL",
+      "url": "https://customers-accounting.ekwaqua.fr"
+    },
+    {
+      "description": "PREPROD",
+      "url": "TODO"
+    },
+    {
+      "description": "PROD",
+      "url": "TODO"
+    }
+  ],
+  "tags": [
+    "PaymentMethod"
+  ],
+  "paths": {
+    "/api/v1/customers/accounting/payment-method": {
+      "post": {
+        "tags": [
+          "PaymentMethod"
+        ],
+        "operationId": "createPaymentMethod",
+        "summary": "Create a payment method from a Json",
+        "description": "Create a payment method",
+        "requestBody": {
+          "description": "PaymentMethod to create",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentMethodDetails"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Payment Method was created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethodDetailsResources"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Payment method empty",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethodDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PaymentMethod"
+        ],
+        "operationId": "findAll",
+        "summary": "Find all payment method details data",
+        "description": "Find all payment method details data stored in the database",
+        "responses": {
+          "200": {
+            "description": "All payment Method details data was returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMehtodResources"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/customers/accounting/payment-method/{payment-method-code}/{company-erp-code}": {
+      "get": {
+        "tags": [
+          "PaymentMethod"
+        ],
+        "operationId": "getPaymentMethodByPaymentMethodCodeAndCompanyErpCode",
+        "summary": "Get accountingDocumentType details details by Id",
+        "description": "Get accountingDocumentType details by Id",
+        "parameters": [
+          {
+            "name": "payment-method-code",
+            "in": "path",
+            "description": "unique identification of payment method",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "CBB"
+            }
+          },
+          {
+            "name": "company-erp-code",
+            "in": "path",
+            "description": "the code of company",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "EKW_PRO"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment method details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethodDetailsResources"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Payment method not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethodDetailsResources"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PaymentMethod"
+        ],
+        "operationId": "updatePaymentMethodByPaymentMethodCodeAndCompanyErpCode",
+        "summary": "Updating payment method details entry",
+        "description": "update payment method",
+        "parameters": [
+          {
+            "name": "payment-method-code",
+            "in": "path",
+            "description": "unique identification of payment method",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "CSS"
+            }
+          },
+          {
+            "name": "company-erp-code",
+            "in": "path",
+            "description": "the code of company",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "EKW_PRO"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Payment method details to update",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentMethodDetails"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Payment method details was updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethodDetailsResources"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "PAYMENT_METHOD_NOT_FOUND",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethodDetailsResources"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PaymentMehtodResources": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Payment method not found"
+          },
+          "code": {
+            "type": "string",
+            "description": "Short code to identify the error",
+            "example": "PAYMENT_METHOD_EMPTY"
+          },
+          "paymentMethodDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentMethodDetails"
+            }
+          }
+        }
+      },
+      "PaymentMethodDetailsResources": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Payment method not found"
+          },
+          "code": {
+            "type": "string",
+            "description": "Short code to identify the error",
+            "example": "PAYMENT_METHOD_EMPTY"
+          },
+          "paymentMethodDetails": {
+            "$ref": "#/components/schemas/PaymentMethodDetails"
+          }
+        }
+      },
+      "PaymentMethodDetails": {
+        "type": "object",
+        "required": [
+          "paymentMethodCode",
+          "paymentMethodName",
+          "companyErpCode"
+        ],
+        "properties": {
+          "paymentMethodCode": {
+            "type": "string",
+            "description": "code of an payment method",
+            "example": "CBB"
+          },
+          "paymentMethodName": {
+            "type": "string",
+            "description": "name of a accountingDocumentType",
+            "example": "Cartes bancaires"
+          },
+          "companyErpCode": {
+            "type": "string",
+            "description": "company ERP code",
+            "example": "JOUL"
+          },
+          "isActive": {
+            "type": "boolean",
+            "description": "Status of payment method details"
+          }
+        }
+      }
+    }
+  }
+}

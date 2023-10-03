@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.accounting.customers.fr</groupId>
-	<artifactId>application</artifactId>
+	<artifactId>accounting</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>application</name>
@@ -19,6 +19,7 @@
 	</modules>
 	<properties>
 		<java.version>17</java.version>
+
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<build-helper-maven-plugin.version>3.4.0</build-helper-maven-plugin.version>
 		<maven.compiler.target>17</maven.compiler.target>
@@ -111,13 +112,72 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.openapitools</groupId>
+					<artifactId>openapi-generator-maven-plugin</artifactId>
+					<version>${openapi-generator-maven-plugin.version}</version>
+					<configuration>
+						<importMappings>
+							<importMapping>JsonNode=com.fasterxml.jackson.databind.JsonNode</importMapping>
+							<importMapping>Object=java.lang.Object</importMapping>
+						</importMappings>
+						<typeMappings>
+							<typeMapping>Double=java.math.BigDecimal</typeMapping>
+							<typeMapping>object+JSonNode=JsonNode</typeMapping>
+						</typeMappings>
+						<generateApiTests>false</generateApiTests>
+						<generateModelTests>false</generateModelTests>
+						<skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>
+						<skipValidateSpec>true</skipValidateSpec>
+						<configOptions>
+							<!--                            <useRecordBuilder>true</useRecordBuilder>-->
+							<implicitHeaders>true</implicitHeaders>
+							<useBeanValidation>false</useBeanValidation>
+							<skipDefaultInterface>true</skipDefaultInterface>
+							<sourceFolder>src/main/java</sourceFolder>
+							<interfaceOnly>true</interfaceOnly>
+							<dateLibrary>java8</dateLibrary>
+							<serializableModel>true</serializableModel>
+							<useSpringBoot3>false</useSpringBoot3>
+							<useTags>true</useTags>
+						</configOptions>
+					</configuration>
+					<executions>
+						<execution>
+							<id>generate-sources-server-payment-method</id>
+							<phase>none</phase>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+							<configuration>
+								<generatorName>spring</generatorName>
+								<inputSpec>payment-method.json</inputSpec>
+								<apiPackage>com.accounting.customers.fr.api.paymentMethod</apiPackage>
+								<invokerPackage>com.accounting.customers.fr.rest.client.paymentMethod</invokerPackage>
+								<modelPackage>com.accounting.customers.fr.rest.model.paymentMethod</modelPackage>
+							</configuration>
+						</execution>
+						<execution>
+							<id>generate-sources-server-company</id>
+							<phase>none</phase>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+							<configuration>
+								<generatorName>spring</generatorName>
+								<inputSpec>company.json</inputSpec>
+								<apiPackage>com.accounting.customers.fr.api.company</apiPackage>
+								<invokerPackage>com.accounting.customers.fr.rest.client.company</invokerPackage>
+								<modelPackage>com.accounting.customers.fr.rest.model.company</modelPackage>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>
