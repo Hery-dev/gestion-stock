@@ -10,7 +10,7 @@ public final class FournisseurMapper {
     private FournisseurMapper() {
     }
 
-    public Optional<FournisseurDetails> mapToDomain(Fournisseur fournisseur){
+    public static Optional<FournisseurDetails> mapToDomain(Fournisseur fournisseur){
         if(Objects.isNull(fournisseur)){
             return Optional.empty();
         }
@@ -22,7 +22,7 @@ public final class FournisseurMapper {
         return Optional.of(fournisseurDetails);
     }
 
-    public Fournisseur mapToModel(FournisseurDetails domain){
+    public static Fournisseur mapToModel(FournisseurDetails domain){
         if(Objects.isNull(domain)){
             return new Fournisseur();
         }

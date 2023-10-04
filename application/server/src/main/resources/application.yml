@@ -1,7 +1,7 @@
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/customers_accounting_vf
+    url: jdbc:postgresql://localhost:5432/gestion-stock
     username: postgres
     password: hery
     driver-class-name: org.postgresql.Driver

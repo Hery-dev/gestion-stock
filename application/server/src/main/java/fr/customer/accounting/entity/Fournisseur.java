@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Entity
 @Table
-public class Fournisseur {
+public class Fournisseur extends AbstractAuditingEntity{
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
