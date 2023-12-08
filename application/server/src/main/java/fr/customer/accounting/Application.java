@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class Application {
     public static void main(String[] args) {
         System.out.println("Test branche");
+        System.out.println("Test branche from main");
         SpringApplication.run(Application.class, args);
     }
 }
